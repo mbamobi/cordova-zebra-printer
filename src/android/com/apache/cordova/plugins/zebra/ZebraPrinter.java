@@ -20,6 +20,7 @@ import com.zebra.sdk.comm.ConnectionException;
 import com.zebra.sdk.printer.PrinterStatus;
 import com.zebra.sdk.printer.ZebraPrinterFactory;
 import com.zebra.sdk.printer.ZebraPrinterLanguageUnknownException;
+import java.nio.charset.Charset;
 
 public class ZebraPrinter extends CordovaPlugin {
     private Connection printerConnection;
@@ -170,7 +171,7 @@ public class ZebraPrinter extends CordovaPlugin {
                 return false;
             }
 
-            byte[] configLabel = cpcl.getBytes();
+            byte[] configLabel = cpcl.getBytes(Charset.forName("ISO-8859-1"));
             printerConnection.write(configLabel);
 
             if (printerConnection instanceof BluetoothConnection) {
